@@ -1,20 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Phone, Mail, MapPin, Clock, Droplet, Sparkles, Shield, Wind, Zap, Star, ChevronRight, Menu, X } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Menu, X, ArrowRight, Star, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 
 /**
- * Premium Car Wash & Auto Detailing Website
- * Design Philosophy: Modern Luxury Minimalism
- * - Precision over decoration
- * - Whitespace as luxury
- * - Masculine sophistication
- * - Motion with purpose
+ * Premium Car Wash & Auto Detailing - Elegant Redesign
+ * Design Philosophy: Modern Luxury Minimalism with Sophisticated Elegance
+ * - Premium typography hierarchy
+ * - Elegant asymmetric layouts
+ * - Sophisticated color transitions
+ * - Advanced micro-interactions
+ * - Luxury brand positioning
  */
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState("exterior");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,69 +35,52 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Sticky Navigation */}
+    <div className="min-h-screen bg-white overflow-hidden">
+      {/* Premium Sticky Navigation */}
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200"
+            ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-100"
             : "bg-transparent"
         }`}
       >
         <nav className="container flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3 group cursor-pointer">
             <img
               src="https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/brand-logo-bwjyKb2zSjhcbfrJpfmWV7.webp"
               alt="Premium Car Wash"
-              className="w-10 h-10"
+              className="w-10 h-10 transition-transform group-hover:scale-110"
             />
-            <span className="text-xl font-bold text-gray-900 hidden sm:inline">Premium Wash</span>
+            <div className="hidden sm:flex flex-col">
+              <span className="text-lg font-bold text-gray-900 leading-none">PRISTINE</span>
+              <span className="text-xs text-gray-500 font-light tracking-widest">AUTO CARE</span>
+            </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection("services")}
-              className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-            >
-              Services
-            </button>
-            <button
-              onClick={() => scrollToSection("about")}
-              className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-            >
-              About
-            </button>
-            <button
-              onClick={() => scrollToSection("gallery")}
-              className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-            >
-              Gallery
-            </button>
-            <button
-              onClick={() => scrollToSection("pricing")}
-              className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-            >
-              Pricing
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-            >
-              Contact
-            </button>
+          <div className="hidden lg:flex items-center gap-12">
+            {["Services", "About", "Gallery", "Pricing", "Contact"].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors relative group"
+              >
+                {item}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300" />
+              </button>
+            ))}
           </div>
 
           {/* CTA Button */}
-          <Button className="hidden md:flex bg-blue-600 hover:bg-blue-700 text-white">
+          <Button className="hidden lg:flex bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 h-11 rounded-full transition-all hover:shadow-lg hover:scale-105 active:scale-95">
             Book Now
           </Button>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -103,39 +88,18 @@ export default function Home() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
-            <div className="container py-4 flex flex-col gap-4">
-              <button
-                onClick={() => scrollToSection("services")}
-                className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium"
-              >
-                Services
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
-                className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("gallery")}
-                className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium"
-              >
-                Gallery
-              </button>
-              <button
-                onClick={() => scrollToSection("pricing")}
-                className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium"
-              >
-                Pricing
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium"
-              >
-                Contact
-              </button>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+          <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl">
+            <div className="container py-6 flex flex-col gap-4">
+              {["Services", "About", "Gallery", "Pricing", "Contact"].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium transition-colors"
+                >
+                  {item}
+                </button>
+              ))}
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold h-11 rounded-full">
                 Book Now
               </Button>
             </div>
@@ -143,211 +107,276 @@ export default function Home() {
         )}
       </header>
 
-      {/* Hero Section */}
+      {/* Hero Section - Elegant & Sophisticated */}
       <section className="relative pt-20 overflow-hidden">
-        <div className="relative h-screen max-h-[800px] flex items-center justify-center">
-          {/* Background Image */}
-          <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/hero-luxury-car-wash-hSS3aERRrD3qHM4rhfwK5i.webp"
-            alt="Luxury car detailing"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+        <div className="relative h-screen max-h-[900px] flex items-center justify-center">
+          {/* Background Image with Parallax */}
+          <div className="absolute inset-0 overflow-hidden">
+            <img
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/hero-luxury-car-wash-hSS3aERRrD3qHM4rhfwK5i.webp"
+              alt="Luxury car detailing"
+              className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000"
+            />
+          </div>
 
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
+          {/* Premium Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+          
+          {/* Decorative Elements */}
+          <div className="absolute top-20 right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
 
           {/* Content */}
-          <div className="relative container z-10 text-white max-w-2xl">
-            <div className="space-y-6 animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Premium Car Wash & Auto Detailing Services
+          <div className="relative container z-10 text-white max-w-3xl">
+            <div className="space-y-8 animate-fade-in">
+              {/* Tagline */}
+              <div className="inline-block">
+                <span className="text-sm font-semibold tracking-widest text-blue-300 uppercase">
+                  ✨ Premium Auto Detailing
+                </span>
+              </div>
+
+              {/* Main Headline */}
+              <h1 className="text-6xl md:text-7xl font-bold leading-tight tracking-tight">
+                Your Vehicle
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-100">
+                  Deserves Perfection
+                </span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-100 font-light">
-                Professional exterior washes, interior detailing, ceramic coatings, and paint protection for vehicles that deserve the best.
+
+              {/* Subheadline */}
+              <p className="text-xl md:text-2xl text-gray-200 font-light max-w-2xl leading-relaxed">
+                Experience meticulous detailing that transforms your vehicle into a masterpiece. Professional care, premium products, exceptional results.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white text-lg h-14 px-8 transition-transform active:scale-95">
-                  Book Appointment
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-8">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white text-lg h-14 px-10 rounded-full font-semibold transition-all hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2 group">
+                  Book Your Appointment
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-white text-white hover:bg-white/10 text-lg h-14 px-8"
+                  className="border-2 border-white text-white hover:bg-white/10 text-lg h-14 px-10 rounded-full font-semibold backdrop-blur-sm"
                 >
-                  View Services
+                  Explore Services
                 </Button>
               </div>
+
+              {/* Trust Indicators */}
+              <div className="flex gap-8 pt-8 text-sm">
+                <div className="flex items-center gap-2">
+                  <Star size={18} className="text-yellow-300 fill-yellow-300" />
+                  <span>4.9/5 Rating</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check size={18} className="text-green-300" />
+                  <span>10+ Years Experience</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Wave Divider */}
+        <div className="absolute bottom-0 left-0 w-full">
+          <svg viewBox="0 0 1440 120" className="w-full h-auto" preserveAspectRatio="none">
+            <path
+              d="M0,50 Q360,0 720,50 T1440,50 L1440,120 L0,120 Z"
+              fill="white"
+              className="drop-shadow-lg"
+            />
+          </svg>
+        </div>
+      </section>
+
+      {/* About Section - Elegant Grid */}
+      <section id="about" className="py-32 bg-white relative">
+        <div className="container">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Content */}
+            <div className="space-y-8">
+              <div>
+                <span className="text-sm font-semibold tracking-widest text-blue-600 uppercase">About Us</span>
+                <h2 className="text-5xl font-bold text-gray-900 mt-4 leading-tight">
+                  Precision Meets Passion
+                </h2>
+              </div>
+
+              <p className="text-lg text-gray-600 leading-relaxed">
+                With over a decade of expertise in professional auto detailing, we've perfected the art of vehicle care. Our commitment to excellence means every vehicle receives meticulous attention to detail using only premium products and cutting-edge equipment.
+              </p>
+
+              <p className="text-lg text-gray-600 leading-relaxed">
+                We don't just clean vehicles—we restore them to their original glory and protect them for the future. Your satisfaction isn't just our goal; it's our obsession.
+              </p>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-3 gap-6 pt-8">
+                {[
+                  { number: "10+", label: "Years" },
+                  { number: "5K+", label: "Vehicles" },
+                  { number: "100%", label: "Satisfied" },
+                ].map((stat, i) => (
+                  <div key={i} className="text-center p-6 bg-gradient-to-br from-blue-50 to-transparent rounded-2xl border border-blue-100 hover:shadow-lg transition-all">
+                    <div className="text-3xl font-bold text-blue-600 mb-2">{stat.number}</div>
+                    <p className="text-sm text-gray-600 font-medium">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Visual */}
+            <div className="relative h-96 lg:h-full min-h-96">
+              <img
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/hero-car-wash-action-PgfWjrc8gEJwozEpVAKGoj.webp"
+                alt="Professional car wash"
+                className="w-full h-full object-cover rounded-3xl shadow-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-3xl" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 bg-white">
-        <div className="container">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl font-bold text-gray-900">About Our Service</h2>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                With over a decade of experience in professional auto detailing, we've built our reputation on precision, attention to detail, and unwavering commitment to customer satisfaction. Our team of experienced technicians uses only the highest-quality products and state-of-the-art equipment to ensure your vehicle receives the premium care it deserves.
-              </p>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                We believe that every vehicle tells a story. Whether it's a luxury sedan, a rugged truck, or a sports car, we treat each one with the same meticulous care and respect.
-              </p>
-            </div>
+      {/* Services Section - Tabbed Interface */}
+      <section id="services" className="py-32 bg-gray-50 relative overflow-hidden">
+        {/* Decorative Background */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl -mr-48" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100/20 rounded-full blur-3xl -ml-48" />
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
-                <div className="text-4xl font-bold text-blue-600 mb-2">10+</div>
-                <p className="text-gray-600 font-medium">Years Experience</p>
-              </div>
-              <div className="text-center p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
-                <div className="text-4xl font-bold text-blue-600 mb-2">5K+</div>
-                <p className="text-gray-600 font-medium">Vehicles Serviced</p>
-              </div>
-              <div className="text-center p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
-                <div className="text-4xl font-bold text-blue-600 mb-2">100%</div>
-                <p className="text-gray-600 font-medium">Satisfaction Focus</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section id="services" className="py-20 bg-gray-50">
-        <div className="container">
+        <div className="container relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Comprehensive auto care solutions tailored to your vehicle's needs
+            <span className="text-sm font-semibold tracking-widest text-blue-600 uppercase">Services</span>
+            <h2 className="text-5xl font-bold text-gray-900 mt-4">
+              Comprehensive Auto Care Solutions
+            </h2>
+            <p className="text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
+              From routine maintenance to premium protection, we offer everything your vehicle needs
             </p>
           </div>
 
-          {/* Exterior Services */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">Exterior Services</h3>
-            <div className="grid md:grid-cols-4 gap-6">
-              {[
-                { name: "Express Wash", icon: Wind, desc: "Quick exterior wash" },
-                { name: "Deluxe Wash", icon: Droplet, desc: "Comprehensive cleaning" },
-                { name: "Premium Wash", icon: Sparkles, desc: "Full detailing wash" },
-                { name: "Hand Wash", icon: Zap, desc: "Precision hand care" },
-              ].map((service, i) => (
-                <Card
-                  key={i}
-                  className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
-                >
-                  <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition-transform" />
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">{service.name}</h4>
-                  <p className="text-gray-600">{service.desc}</p>
-                </Card>
-              ))}
-            </div>
+          {/* Service Tabs */}
+          <div className="flex justify-center gap-4 mb-16 flex-wrap">
+            {[
+              { id: "exterior", label: "Exterior" },
+              { id: "detailing", label: "Detailing" },
+              { id: "protection", label: "Protection" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 ${
+                  activeTab === tab.id
+                    ? "bg-blue-600 text-white shadow-lg scale-105"
+                    : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
 
-          {/* Detailing Services */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">Detailing Services</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { name: "Interior Detailing", icon: Sparkles, desc: "Deep clean interior" },
-                { name: "Exterior Detailing", icon: Shield, desc: "Complete exterior care" },
-                { name: "Full Detail Package", icon: Star, desc: "Complete transformation" },
-              ].map((service, i) => (
-                <Card
-                  key={i}
-                  className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
-                >
-                  <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition-transform" />
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">{service.name}</h4>
-                  <p className="text-gray-600">{service.desc}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Protection Services */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">Protection Services</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { name: "Ceramic Coating", icon: Shield, desc: "Long-lasting protection" },
-                { name: "Paint Protection", icon: Sparkles, desc: "Advanced protection" },
-                { name: "Wax & Polish", icon: Zap, desc: "Premium finish" },
-              ].map((service, i) => (
-                <Card
-                  key={i}
-                  className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
-                >
-                  <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition-transform" />
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">{service.name}</h4>
-                  <p className="text-gray-600">{service.desc}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Additional Services */}
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">Additional Services</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { name: "Engine Cleaning", icon: Zap, desc: "Professional engine care" },
-                { name: "Headlight Restoration", icon: Sparkles, desc: "Restore clarity" },
-                { name: "Tire Shine", icon: Shield, desc: "Professional finish" },
-              ].map((service, i) => (
-                <Card
-                  key={i}
-                  className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
-                >
-                  <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition-transform" />
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">{service.name}</h4>
-                  <p className="text-gray-600">{service.desc}</p>
-                </Card>
-              ))}
-            </div>
+          {/* Service Cards Grid */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {activeTab === "exterior" && (
+              <>
+                {[
+                  { name: "Express Wash", price: "$29", desc: "Quick exterior wash with premium finish" },
+                  { name: "Deluxe Wash", price: "$49", desc: "Comprehensive cleaning with tire shine" },
+                  { name: "Premium Wash", price: "$79", desc: "Full detailing wash with wax application" },
+                ].map((service, i) => (
+                  <ServiceCard key={i} service={service} delay={i} />
+                ))}
+              </>
+            )}
+            {activeTab === "detailing" && (
+              <>
+                {[
+                  { name: "Interior Detailing", price: "$89", desc: "Deep clean interior with conditioning" },
+                  { name: "Exterior Detailing", price: "$119", desc: "Complete exterior care and polish" },
+                  { name: "Full Detail Package", price: "$199", desc: "Complete transformation inside and out" },
+                ].map((service, i) => (
+                  <ServiceCard key={i} service={service} delay={i} />
+                ))}
+              </>
+            )}
+            {activeTab === "protection" && (
+              <>
+                {[
+                  { name: "Ceramic Coating", price: "$299", desc: "Long-lasting paint protection" },
+                  { name: "Paint Protection Film", price: "$399", desc: "Advanced protection from damage" },
+                  { name: "Premium Package", price: "$699", desc: "Ceramic + PPF + Interior Protection" },
+                ].map((service, i) => (
+                  <ServiceCard key={i} service={service} delay={i} />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-white">
+      {/* Why Choose Us - Elegant Cards */}
+      <section className="py-32 bg-white">
         <div className="container">
-          <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Why Choose Us</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center mb-16">
+            <span className="text-sm font-semibold tracking-widest text-blue-600 uppercase">Why Choose Us</span>
+            <h2 className="text-5xl font-bold text-gray-900 mt-4">
+              Excellence in Every Detail
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Experienced Professionals", desc: "Highly trained technicians with years of expertise" },
-              { title: "Eco-Friendly Products", desc: "Sustainable solutions that protect the environment" },
-              { title: "Affordable Pricing", desc: "Premium quality at competitive rates" },
-              { title: "Fast Service", desc: "Efficient turnaround without compromising quality" },
-              { title: "Customer Satisfaction", desc: "Your satisfaction is our top priority" },
-              { title: "Premium Equipment", desc: "State-of-the-art tools and technology" },
+              { icon: "⚡", title: "Expert Technicians", desc: "Highly trained professionals with years of experience" },
+              { icon: "🌱", title: "Eco-Friendly", desc: "Sustainable products that protect the environment" },
+              { icon: "💎", title: "Premium Products", desc: "Only the finest detailing products and equipment" },
+              { icon: "⏱️", title: "Fast Turnaround", desc: "Efficient service without compromising quality" },
+              { icon: "✅", title: "Satisfaction Guaranteed", desc: "100% customer satisfaction or your money back" },
+              { icon: "🏆", title: "Award Winning", desc: "Recognized for excellence in auto detailing" },
             ].map((item, i) => (
-              <div key={i} className="text-center p-6">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Star className="w-8 h-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
+              <div
+                key={i}
+                className="p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 group cursor-pointer"
+              >
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{item.icon}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section id="gallery" className="py-20 bg-gray-50">
+      {/* Gallery Section - Premium Grid */}
+      <section id="gallery" className="py-32 bg-gray-50 relative overflow-hidden">
         <div className="container">
-          <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Gallery</h2>
+          <div className="text-center mb-16">
+            <span className="text-sm font-semibold tracking-widest text-blue-600 uppercase">Gallery</span>
+            <h2 className="text-5xl font-bold text-gray-900 mt-4">
+              Transformation Gallery
+            </h2>
+            <p className="text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
+              See the dramatic before-and-after transformations we achieve
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
                 key={i}
-                className="aspect-square bg-gray-300 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer group"
+                className="group relative aspect-square overflow-hidden rounded-2xl bg-gray-300 cursor-pointer"
               >
-                <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
-                  <Sparkles className="w-12 h-12 text-white opacity-50" />
+                <div className="w-full h-full bg-gradient-to-br from-gray-400 via-gray-500 to-gray-600 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+                  <div className="text-center text-white">
+                    <div className="text-5xl mb-2">✨</div>
+                    <p className="font-semibold">Before & After</p>
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <div className="text-white">
+                    <p className="font-bold text-lg">Luxury Vehicle Detail</p>
+                    <p className="text-sm text-gray-300">Professional transformation</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -355,145 +384,158 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-white">
+      {/* Pricing Section - Premium Cards */}
+      <section id="pricing" className="py-32 bg-white">
         <div className="container">
-          <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Pricing Plans</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center mb-16">
+            <span className="text-sm font-semibold tracking-widest text-blue-600 uppercase">Pricing</span>
+            <h2 className="text-5xl font-bold text-gray-900 mt-4">
+              Transparent Pricing, Exceptional Value
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
-                name: "Basic Wash",
-                price: "$29",
-                desc: "Perfect for routine cleaning",
-                features: ["Exterior wash", "Tire shine", "Air freshener"],
+                name: "Essential",
+                price: "$49",
+                desc: "Perfect for routine maintenance",
+                features: ["Exterior Wash", "Tire Shine", "Air Freshener"],
               },
               {
-                name: "Premium Detail",
-                price: "$79",
-                desc: "Most Popular",
-                features: ["Exterior detailing", "Interior cleaning", "Wax application", "Tire shine"],
+                name: "Premium",
+                price: "$129",
+                desc: "Most Popular - Complete detailing",
+                features: ["Exterior Detail", "Interior Clean", "Wax Application", "Tire Shine"],
                 highlighted: true,
               },
               {
-                name: "Ultimate Protection",
-                price: "$199",
-                desc: "Complete transformation",
-                features: ["Full detailing", "Ceramic coating", "Paint protection", "Interior detail"],
+                name: "Ultimate",
+                price: "$299",
+                desc: "Complete transformation & protection",
+                features: ["Full Detail", "Ceramic Coating", "Paint Protection", "Interior Detail"],
               },
             ].map((plan, i) => (
-              <Card
+              <div
                 key={i}
-                className={`p-8 transition-all duration-300 ${
+                className={`relative rounded-3xl overflow-hidden transition-all duration-300 ${
                   plan.highlighted
-                    ? "ring-2 ring-blue-600 shadow-xl scale-105"
-                    : "hover:shadow-lg"
+                    ? "ring-2 ring-blue-600 shadow-2xl scale-105 bg-gradient-to-br from-blue-50 to-white"
+                    : "bg-white border border-gray-200 hover:shadow-xl hover:border-blue-200"
                 }`}
               >
                 {plan.highlighted && (
-                  <div className="bg-blue-600 text-white px-4 py-1 rounded-full inline-block text-sm font-bold mb-4">
-                    Most Popular
+                  <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-blue-500 text-white py-2 text-center font-bold text-sm">
+                    MOST POPULAR
                   </div>
                 )}
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                <p className="text-gray-600 mb-4">{plan.desc}</p>
-                <div className="text-4xl font-bold text-blue-600 mb-6">{plan.price}</div>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, j) => (
-                    <li key={j} className="flex items-center gap-2 text-gray-700">
-                      <ChevronRight className="w-5 h-5 text-blue-600" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  className={`w-full h-12 ${
-                    plan.highlighted
-                      ? "bg-blue-600 hover:bg-blue-700 text-white"
-                      : "border border-blue-600 text-blue-600 hover:bg-blue-50"
-                  }`}
-                >
-                  Choose Plan
-                </Button>
-              </Card>
+
+                <div className={`p-8 ${plan.highlighted ? "pt-16" : ""}`}>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                  <p className="text-gray-600 text-sm mb-6">{plan.desc}</p>
+
+                  <div className="mb-8">
+                    <span className="text-5xl font-bold text-gray-900">{plan.price}</span>
+                  </div>
+
+                  <ul className="space-y-4 mb-8">
+                    {plan.features.map((feature, j) => (
+                      <li key={j} className="flex items-center gap-3 text-gray-700">
+                        <Check size={20} className="text-blue-600 flex-shrink-0" />
+                        <span className="font-medium">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Button
+                    className={`w-full h-12 rounded-full font-semibold transition-all ${
+                      plan.highlighted
+                        ? "bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg hover:scale-105"
+                        : "border-2 border-blue-600 text-blue-600 hover:bg-blue-50"
+                    }`}
+                  >
+                    Choose Plan
+                  </Button>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
-        <div className="container text-center">
-          <h2 className="text-5xl font-bold mb-6">Give Your Vehicle the Shine It Deserves</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Experience premium auto detailing that transforms your vehicle and protects your investment
+      {/* CTA Section - Premium */}
+      <section className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl" />
+
+        <div className="container relative z-10 text-center">
+          <h2 className="text-6xl font-bold text-white mb-6 leading-tight">
+            Ready to Transform Your Vehicle?
+          </h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Join thousands of satisfied customers who trust us with their most prized possessions
           </p>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white text-lg h-14 px-12">
-            Schedule Your Wash Today
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white text-lg h-14 px-12 rounded-full font-semibold transition-all hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2 group mx-auto">
+            Schedule Your Appointment
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
+      {/* Contact Section - Elegant */}
+      <section id="contact" className="py-32 bg-white">
         <div className="container">
-          <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Get In Touch</h2>
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="text-center mb-16">
+            <span className="text-sm font-semibold tracking-widest text-blue-600 uppercase">Contact</span>
+            <h2 className="text-5xl font-bold text-gray-900 mt-4">
+              Get In Touch
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Info */}
             <div className="space-y-8">
-              <div className="flex gap-4">
-                <Phone className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-1">Phone</h3>
-                  <p className="text-gray-600">(555) 123-4567</p>
+              {[
+                { icon: Phone, title: "Phone", value: "(555) 123-4567" },
+                { icon: Mail, title: "Email", value: "info@premiumcarwash.com" },
+                { icon: MapPin, title: "Location", value: "123 Auto Detail Lane, Los Angeles, CA 90001" },
+                { icon: Clock, title: "Hours", value: "Mon-Fri: 8AM-6PM | Sat-Sun: 9AM-5PM" },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-4 group cursor-pointer">
+                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <item.icon size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 mb-1">{item.title}</h3>
+                    <p className="text-gray-600">{item.value}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex gap-4">
-                <Mail className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-1">Email</h3>
-                  <p className="text-gray-600">info@premiumcarwash.com</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <MapPin className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-1">Location</h3>
-                  <p className="text-gray-600">123 Auto Detail Lane, Los Angeles, CA 90001</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <Clock className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-1">Business Hours</h3>
-                  <p className="text-gray-600">Mon - Fri: 8:00 AM - 6:00 PM</p>
-                  <p className="text-gray-600">Sat - Sun: 9:00 AM - 5:00 PM</p>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Contact Form */}
-            <form className="space-y-4">
+            <form className="space-y-6">
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-6 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
               />
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-6 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
               />
               <input
                 type="tel"
                 placeholder="Phone Number"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-6 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
               />
               <textarea
                 placeholder="Your Message"
                 rows={5}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 resize-none"
+                className="w-full px-6 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all resize-none"
               />
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 rounded-xl font-semibold transition-all hover:shadow-lg">
                 Send Message
               </Button>
             </form>
@@ -501,10 +543,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      {/* Premium Footer */}
+      <footer className="bg-gray-900 text-white py-16 border-t border-gray-800">
         <div className="container">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <img
@@ -512,36 +554,35 @@ export default function Home() {
                   alt="Premium Car Wash"
                   className="w-8 h-8"
                 />
-                <span className="font-bold">Premium Wash</span>
+                <div>
+                  <p className="font-bold text-sm">PRISTINE</p>
+                  <p className="text-xs text-gray-400">AUTO CARE</p>
+                </div>
               </div>
-              <p className="text-gray-400">Professional auto detailing for discerning vehicle owners.</p>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Premium auto detailing for discerning vehicle owners who demand perfection.
+              </p>
             </div>
-            <div>
-              <h4 className="font-bold mb-4">Services</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition">Exterior Wash</a></li>
-                <li><a href="#" className="hover:text-white transition">Detailing</a></li>
-                <li><a href="#" className="hover:text-white transition">Protection</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition">About</a></li>
-                <li><a href="#" className="hover:text-white transition">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition">Blog</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Follow Us</h4>
-              <div className="flex gap-4">
-                <a href="#" className="text-gray-400 hover:text-white transition">Facebook</a>
-                <a href="#" className="text-gray-400 hover:text-white transition">Instagram</a>
-                <a href="#" className="text-gray-400 hover:text-white transition">Twitter</a>
+            {[
+              { title: "Services", links: ["Exterior Wash", "Detailing", "Protection"] },
+              { title: "Company", links: ["About", "Contact", "Blog"] },
+              { title: "Follow", links: ["Facebook", "Instagram", "Twitter"] },
+            ].map((col, i) => (
+              <div key={i}>
+                <h4 className="font-bold mb-4">{col.title}</h4>
+                <ul className="space-y-2">
+                  {col.links.map((link, j) => (
+                    <li key={j}>
+                      <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            ))}
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
             <p>&copy; 2024 Premium Car Wash & Auto Detailing. All rights reserved.</p>
           </div>
         </div>
@@ -563,9 +604,39 @@ export default function Home() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="fixed bottom-8 left-8 bg-gray-900 hover:bg-gray-800 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 active:scale-95 z-40"
         >
-          <ChevronRight size={24} className="rotate-180" />
+          ↑
         </button>
       )}
+    </div>
+  );
+}
+
+// Service Card Component
+function ServiceCard({ service, delay }: { service: any; delay: number }) {
+  return (
+    <div
+      className="group relative p-8 rounded-2xl bg-white border border-gray-200 hover:border-blue-300 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer overflow-hidden"
+      style={{ animationDelay: `${delay * 100}ms` }}
+    >
+      {/* Gradient Background on Hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+      <div className="relative z-10">
+        <div className="flex items-start justify-between mb-4">
+          <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+            <span className="text-xl">✨</span>
+          </div>
+          <span className="text-2xl font-bold text-blue-600">{service.price}</span>
+        </div>
+
+        <h4 className="text-xl font-bold text-gray-900 mb-2">{service.name}</h4>
+        <p className="text-gray-600 text-sm leading-relaxed">{service.desc}</p>
+
+        <div className="mt-6 flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all">
+          Learn More
+          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+        </div>
+      </div>
     </div>
   );
 }
