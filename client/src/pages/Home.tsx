@@ -194,7 +194,7 @@ export default function Home() {
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Content */}
-            <div className="space-y-8">
+            <div className="space-y-8 animate-fade-in">
               <div>
                 <span className="text-sm font-semibold tracking-widest text-blue-600 uppercase">About Us</span>
                 <h2 className="text-5xl font-bold text-gray-900 mt-4 leading-tight">
@@ -361,21 +361,51 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+            {[
+              {
+                image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/gallery-1-before-after-UFzAsR4dcXyenxwEpzyUcU.webp',
+                title: 'Luxury Sedan Detail',
+                desc: 'Complete ceramic coating'
+              },
+              {
+                image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/gallery-2-before-after-kKAkPw69xhWQBYR4Gis3QM.webp',
+                title: 'White SUV Restoration',
+                desc: 'Deep cleaning & protection'
+              },
+              {
+                image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/gallery-3-before-after-czAKzcKtksDFR6zAc5DWJ6.webp',
+                title: 'Sports Car Polish',
+                desc: 'Mirror-like finish achieved'
+              },
+              {
+                image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/gallery-4-before-after-cvbEdN9fJjUScgNoFU3RxZ.webp',
+                title: 'Red Sedan Transformation',
+                desc: 'Oxidation removal & wax'
+              },
+              {
+                image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/gallery-5-before-after-4v5moV58ZMcoxtH8VjmJmA.webp',
+                title: 'Blue Luxury Detail',
+                desc: 'Full interior & exterior'
+              },
+              {
+                image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663768090420/6MaZNP4xquf8VtHtunHXAg/gallery-1-before-after-UFzAsR4dcXyenxwEpzyUcU.webp',
+                title: 'Premium Protection',
+                desc: 'Ceramic coating applied'
+              },
+            ].map((item, i) => (
               <div
                 key={i}
-                className="group relative aspect-square overflow-hidden rounded-2xl bg-gray-300 cursor-pointer"
+                className="group relative aspect-square overflow-hidden rounded-2xl bg-gray-300 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
               >
-                <div className="w-full h-full bg-gradient-to-br from-gray-400 via-gray-500 to-gray-600 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
-                  <div className="text-center text-white">
-                    <div className="text-5xl mb-2">✨</div>
-                    <p className="font-semibold">Before & After</p>
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                   <div className="text-white">
-                    <p className="font-bold text-lg">Luxury Vehicle Detail</p>
-                    <p className="text-sm text-gray-300">Professional transformation</p>
+                    <p className="font-bold text-lg">{item.title}</p>
+                    <p className="text-sm text-gray-300">{item.desc}</p>
                   </div>
                 </div>
               </div>
